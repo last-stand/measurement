@@ -6,30 +6,17 @@ import java.util.Map;
 /**
  * Created by jaiprak on 3/16/2015.
  */
-public class Volume implements CompareUnit{
-    private double value;
-    private Unit unit;
-    private static final double PRECISION = 0.2;
-    public Volume(Unit unit, double value) {
-        this.value = value;
-        this.unit = unit;
-    }
-    private static final Map<Unit,Double> conversionFactor = new HashMap<Unit,Double>();
+public class Volume extends ScalarQuantity<VolumeUnit>{
+    private static Map<VolumeUnit,Double> litre_conversionFactor = new HashMap<VolumeUnit, Double>();
     static {
-        conversionFactor.put(Unit.GALLON, 3.78541d);
-        conversionFactor.put(Unit.LITRE, 1d);
-        conversionFactor.put(Unit.CUBIC_METER, 1000d);
+        litre_conversionFactor.put(VolumeUnit.GALLON, 3.78541d);
+        litre_conversionFactor.put(VolumeUnit.LITRE, 1d);
+        litre_conversionFactor.put(VolumeUnit.CUBIC_METER, 1000d);
     }
 
-    public double getConvertedValue(){
-        return value*conversionFactor.get(unit);
-    }
-
-    public boolean compare(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Volume)) return false;
-        Volume volume = (Volume) o;
-        double abs = Math.abs(getConvertedValue() - volume.getConvertedValue());
-        return abs <= PRECISION;
+    public Volume(VolumeUnit unit, double value) {
+        super(unit,value);
+        conversionFactor = litre_conversionFactor;
+        baseUnit = VolumeUnit.LITRE;
     }
 }
