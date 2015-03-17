@@ -27,4 +27,9 @@ public class ScalarQuantity<U> {
         double abs = Math.abs(getConvertedValue() - quantity.getConvertedValue());
         return abs <= PRECISION;
     }
+
+    public double add(Object o){
+        double sum = getConvertedValue() + ((ScalarQuantity)o).getConvertedValue();
+        return sum;
+    }
 }

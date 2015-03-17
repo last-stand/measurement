@@ -1,6 +1,7 @@
 import com.measure.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -39,6 +40,16 @@ public class UnitComparatorTest {
         assertTrue(foot.compare(cms));
         assertTrue(cms.compare(foot));
     }
+
+    @Test
+    public void test_1_foot_plus_1_foot_should_be_equal_to_2_feet(){
+        Length foot1 = new Length(LengthUnit.FOOT,1);
+        Length foot2 = new Length(LengthUnit.FOOT,2);
+        assertEquals(foot1.add(foot2),36,0.0);
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Test
     public void test_1_gallon_should_be_equal_to_3p78_litre(){
